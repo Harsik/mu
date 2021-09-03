@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<body th:fragment="postBody">
+<!--<th:block th:replace="fragments/topBar :: topBar"></th:block>-->
+<div class="grid-container full">
+    <div class="grid-x grid-margin-x">
+<!--        <th:block th:replace="fragments/sideBar :: postSideBar"></th:block>-->
+        <th:block layout:fragment="content"></th:block>
+    </div>
+</div>
+<th:block th:replace="fragments/script :: script"></th:block>
+</body>
+
+<body th:fragment="mainBody">
+<!--<th:block th:replace="fragments/topBar :: topBar"></th:block>-->
+<div class="grid-container full">
+    <div class="grid-x grid-margin-x">
+<!--        <th:block th:replace="fragments/sideBar :: mainSideBar"></th:block>-->
+        <th:block layout:fragment="content"></th:block>
+    </div>
+</div>
+<th:block th:replace="fragments/script :: script"></th:block>
+</body>
+
+<body th:fragment="body">
+<!--<th:block th:replace="fragments/topBar :: topBar"></th:block>-->
+<div class="grid-container full">
+    <div class="grid-x grid-margin-x">
+<!--        <th:block th:replace="fragments/sideBar :: sideBar"></th:block>-->
+        <th:block layout:fragment="content"></th:block>
+    </div>
+</div>
+<th:block th:replace="fragments/script :: script"></th:block>
+</body>
+
+</html>

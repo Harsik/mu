@@ -1,0 +1,108 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Main - Akam</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css"
+          integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg=="
+          crossorigin="anonymous">
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+<div class="top-bar">
+    <div class="top-bar-left">
+        <div class="top-bar-title">AkamWare</div>
+    </div>
+    <div class="top-bar-right">
+        <ul class="menu">
+            <li><input type="search" placeholder="Search"></li>
+            <li><button type="button" class="button">Search</button></li>
+            <li><button type="button" class="button" onclick = "location.href = '/user/login' ">Sign in</button></li>
+            <li><button type="button" class="button" onclick = "location.href = '/user/signup' ">Sign up</button></li>
+        </ul>
+    </div>
+</div>
+<div class="grid-container full">
+    <div class="grid-x grid-margin-x">
+        <div class="cell shrink">
+            <ul class="vertical menu accordion-menu" data-accordion-menu>
+                <li><button type="button" class="button">글쓰기</button></li>
+                <li class="is-active"><a href="#">최근게시물</a></li>
+                <li><a href="#">전사 게시판</a><ul class="menu vertical nested">
+                    <li><a href="#">사내공지</a></li>
+                    <li><a href="#">자유게시판</a></li>
+                    <li><a href="#">점검내역서</a></li>
+                </ul></li>
+                <li><a href="#">환경설정</a></li>
+                <li><a href="#">게시판 만들기</a></li>
+            </ul>
+        </div>
+        <div class="cell auto">
+            <div class="grid-x grid-padding-x align-center-middle" style="height: 100%;">
+                <div class="cell small-12">
+<!--                    <div class="card">-->
+<!--                        <form th:action="@{/post/save}" method="post">-->
+<!--                            <div class="card-divider">-->
+<!--                                <input type="text" name="subject">-->
+<!--                            </div>-->
+<!--                            <div class="card-section">-->
+<!--                                <textarea name="content"></textarea>-->
+<!--                            </div>-->
+<!--                            <button type="summit">Summit</button>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                    <div class="card" th:if="${!posts.isEmpty()}" th:each="post : ${posts.content}" th:object="${post}">-->
+<!--                        <div class="card-divider" th:text="*{subject} + *{author}">-->
+<!--                        </div>-->
+<!--                        <div class="card-section">-->
+<!--                            <textarea th:text="*{content}"></textarea>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <table>
+                    <thead>
+                    <tr>
+                        <th width="150">글 제목</th>
+                        <th width="150">글쓴이</th>
+                        <th width="150">작성일</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="post : ${posts.content}" th:object="${post}">
+                        <td th:text="*{subject}"></td>
+                        <td th:text="*{author}"></td>
+                        <td th:text="*{#temporals.format(updateDt,'yyyy-MM-dd')}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+
+            <nav aria-label="Pagination" th:object="${posts}">
+                <ul class="pagination text-center" th:if="*{totalPages gt 0}">
+                    <li class="pagination-previous" th:classappend="*{number le 0}  ? 'disabled'">
+                        <a th:if="*{number gt 0}" th:href="@{/post/recent/{page}(page=*{number lt 2 ? 1 : number})}" th:attr="aria-label='Previous Page'">Previous</a>
+                        <th:block th:if="*{number le 0}" th:text="Previous"></th:block>
+                    </li>
+
+                    <li th:each="i : *{#numbers.sequence(number - 3 lt 1 ? 1 : number - 3, number + 5 gt totalPages ? totalPages : number + 5, 1)}"
+                        th:classappend="${i eq posts.number + 1} ? 'current'">
+                        <a th:href="@{/post/recent/{page}(page=${i})}" th:attr="aria-label='Page ' + ${i}" th:text="${i}"></a>
+                    </li>
+                    <li class="pagination-next" th:classappend="*{number + 1 ge totalPages} ? 'disabled'">
+                        <a th:if="*{number + 1 lt totalPages}" th:href="@{/post/recent/{page}(page=*{number lt 2 ? 1 : number + 2})}" th:attr="aria-label='Next Page'">Next</a>
+                        <th:block th:if="*{number + 1 ge totalPages}" th:text="Next"></th:block>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js"
+        integrity="sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk= sha384-KzKofw4qqetd3kvuQ5AdapWPqV1ZI+CnfyfEwZQgPk8poOLWaabfgJOfmW7uI+AV sha512-0gHfaMkY+Do568TgjJC2iMAV0dQlY4NqbeZ4pr9lVUTXQzKu8qceyd6wg/3Uql9qA2+3X5NHv3IMb05wb387rA=="
+        crossorigin="anonymous"></script>
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html>

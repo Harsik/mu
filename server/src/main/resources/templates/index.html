@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/main">
+
+<th:block layout:fragment="content">
+    <div class="cell auto">
+        <div class="grid-x grid-padding-x align-center-middle" style="height: 100%;">
+            <div class="cell small-6" th:if="${posts!=null}" >
+                <div class="card" th:each="post : ${posts.content}" th:object="${post}">
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</html>

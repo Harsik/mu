@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/post">
+
+<th:block layout:fragment="content">
+        <div class="cell auto">
+            <div class="grid-x grid-margin-x grid-margin-y align-center-middle" style="height: 100%;">
+                <div class="cell small-12">
+                    <div class="card" th:object="${post}">
+                        <div class="card-divider">
+                            <div class="grid-x grid-margin-x">
+                                <div class="cell auto" th:text="*{subject}"></div>
+                                <div class="cell auto" th:text="*{author.username}"></div>
+                                <div class="cell auto" th:text="*{category}"></div>
+                                <div class="cell auto" th:text="*{updateDt}"></div>
+                            </div>
+                        </div>
+                        <div class="card-section" th:text="*{content}">
+                            <h4>This is a card.</h4>
+                            <p>It has an easy to override visual style, and is appropriately subdued.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

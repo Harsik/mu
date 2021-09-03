@@ -1,0 +1,37 @@
+server:
+  port: 8081
+spring:
+  data:
+    mongodb:
+#      uri: mongodb://archiv:archiv@192.168.137.82:27017/testdb
+      authentication-database: admin
+      host: 192.168.137.82
+      port: 27017
+      database: testdb
+      username: archiv
+      password: archiv
+      auto-index-creation: false
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      show_sql: true
+      format_sql: true
+      ddl-auto: update
+  devtools:
+    livereload:
+      enabled: true
+    freemarker:
+      cache: false
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+file:
+  upload-dir: ${user.dir}/uploads

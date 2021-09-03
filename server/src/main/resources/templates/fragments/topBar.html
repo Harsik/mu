@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="topBar">
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <div class="top-bar-title">AkamWare</div>
+        </div>
+        <div class="top-bar-right">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li><input type="search" placeholder="Search"></li>
+                <li>
+                    <button type="button" class="button">Search</button>
+                </li>
+                <li th:if="${userAccount!=null}" th:inline="text">[[${userAccount.name}]]
+                    <ul class="menu">
+                        <li><a href="/user/profile">Profile</a></li>
+                        <li><a href="/user/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</th:block>
+
+</html>

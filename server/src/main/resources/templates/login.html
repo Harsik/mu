@@ -1,0 +1,72 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Log in - Akam</title>
+        <link rel="stylesheet" href="../css/app.css">
+        <script src="../js/app.js"></script>
+    <link rel="shortcut icon" href="#">
+</head>
+<body style="background: #eee !important;">
+<div class="grid-container">
+    <div class="grid-x grid-padding-x grid-y grid-padding-y align-center-middle" style="height: 100%;">
+        <div class="cell small-6">
+            <form class="callout" th:action="@{'/user/login'}" method="post">
+                <h2>Please Login</h2>
+                <input type="text" name="username" placeholder="Username" required="" autofocus=""/>
+                <input type="password" name="password" placeholder="Password" required=""/>
+                <label class="checkbox">
+                    <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+                </label>
+                <div th:if="${errorMsg!=null}" th:text="${errorMsg}"/>
+                <button class="button" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<!-- customers pagination -->
+<!--<div class="container text-center">-->
+<!--    <div aria-label="Pagination" th:object="${posts}">-->
+<!--        <ul th:if="*{totalPages gt 0}">-->
+<!--            <li style="display:inline" th:if="*{number ne 0}" th:classappend="*{number eq 0} ? 'disabled'">-->
+<!--                <a-->
+<!--                        th:href="@{/admin/cateList/1?isAll={isAll}(page=1, isAll=${isAll})}"-->
+<!--                        aria-label="Previous" title="First Page" data-toggle="tooltip">-->
+<!--                    <span aria-hidden="true">◀</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li style="display:inline" th:if="*{number ne 0}" th:classappend="*{number eq 0} ? 'disabled'">-->
+<!--                <a-->
+<!--                        th:href="@{/admin/cateList/{page}?isAll={isAll}(page=*{number lt 2 ? 1 : number},isAll=${isAll})}"-->
+<!--                        aria-label="Previous" title="Previous Page" data-toggle="tooltip">-->
+<!--                    <span aria-hidden="true">◁</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li style="display:inline" th:classappend="${i eq posts.number + 1} ? 'active'"-->
+<!--                th:each="i : *{#numbers.sequence(number - 3 lt 1 ? 1 : number - 3, number + 5 gt totalPages ? totalPages : number + 5, 1)}">-->
+<!--                <a class="page-link"-->
+<!--                   th:href="@{/admin/cateList/{page}?isAll={isAll}(page=${i},isAll=${isAll})}"-->
+<!--                   th:text="[+${i}+]"-->
+<!--                   th:title="${'Page '+ i}" data-toggle="tooltip"></a>-->
+<!--            </li>-->
+<!--            <li style="display:inline" th:if="*{number + 1 ne totalPages}"-->
+<!--                th:classappend="*{number + 1 eq totalPages} ? 'disabled'">-->
+<!--                <a-->
+<!--                        th:href="@{/admin/cateList/{page}?isAll={isAll}(page=*{number + 2},isAll=${isAll})}"-->
+<!--                        aria-label="Next" title="Next Page" data-toggle="tooltip">-->
+<!--                    <span aria-hidden="true">▷</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li style="display:inline" th:if="*{number + 1 ne totalPages}"-->
+<!--                th:classappend="*{number + 1 eq totalPages} ? 'disabled'">-->
+<!--                <a-->
+<!--                        th:href="@{/admin/cateList/{page}?isAll={isAll}(page=*{totalPages},isAll=${isAll})}"-->
+<!--                        aria-label="Next" title="Last Page" data-toggle="tooltip">-->
+<!--                    <span aria-hidden="true">▶</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</div>-->

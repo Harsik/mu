@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="postSideBar">
+    <div class="cell small-2 medium-2 large-2">
+        <ul th:with="accessPoint = ${#strings.arraySplit(#httpServletRequest.requestURI,'/')[1]}"
+            class="vertical menu accordion-menu" data-accordion-menu>
+            <li>
+                <button type="button" class="button secondary expanded" onclick="location.href='/post/create'">글쓰기
+                </button>
+            </li>
+            <li th:classappend="${#strings.equals(accessPoint,'recent')} ? 'is-active'"><a href="/post/recent">최근게시물</a></li>
+            <li><a href="#">전사 게시판 </a>
+                <ul class="menu vertical nested" th:classappend="${#strings.equals(accessPoint,'notify')||#strings.equals(accessPoint,'free')||#strings.equals(accessPoint,'check')} ? 'is-active'">
+                    <li th:classappend="${#strings.equals(accessPoint,'notify')} ? 'is-active'"><a href="/post/notify">사내공지</a></li>
+                    <li th:classappend="${#strings.equals(accessPoint,'free')} ? 'is-active'"><a href="/post/free">자유게시판</a></li>
+                    <li th:classappend="${#strings.equals(accessPoint,'check')} ? 'is-active'"><a href="/post/check">점검내역서</a></li>
+                </ul>
+            </li>
+            <li th:classappend="${#strings.equals(accessPoint,'setting')} ? 'is-active'"><a href="/post/setting">환경설정</a></li>
+<!--            <li th:classappend="${#strings.equals(accessPoint,'board')} ? 'is-active'"><a href="/post/board">게시판 만들기</a></li>-->
+        </ul>
+    </div>
+</th:block>
+
+<th:block th:fragment="mainSideBar">
+    <div class="cell shrink">
+        <ul class="vertical menu">
+            <li><a href="#">메일</a></li>
+            <li><a href="post">게시판</a></li>
+            <li><a href="#">인사관리</a></li>
+            <li><a href="#">전자결제</a></li>
+            <li><a href="#">스토어</a></li>
+            <li><a href="#">주소록</a></li>
+            <li><a href="#">전자세금계산서</a></li>
+            <li><a href="#">공용메일</a></li>
+            <li><a href="#">예약</a></li>
+            <li><a href="#">즐겨찾기</a></li>
+        </ul>
+    </div>
+</th:block>
+
+</html>

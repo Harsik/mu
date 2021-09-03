@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/post">
+
+<th:block layout:fragment="content">
+        <div class="cell auto">
+            <div class="grid-x grid-margin-x grid-margin-y align-center-middle" style="height: 100%;">
+                <div class="cell small-12">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th width="300">글 제목</th>
+                            <th width="150">글쓴이</th>
+                            <th width="150">작성일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="post : ${posts.content}" th:object="${post}">
+                            <td th:inline="text"><a th:href="@{/post/{category}/view/{id}(category=*{category},id=*{id})}">[[*{subject}]]</a></td>
+                            <td th:text="*{author.username}"></td>
+                            <td th:text="*{#temporals.format(updateDt,'yyyy-MM-dd')}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="grid-x grid-padding-x align-center-middle">
+            </div>
+
+            <nav aria-label="Pagination" th:object="${posts}" th:with="category = ${#strings.arraySplit(#httpServletRequest.requestURI,'/')[1]}">
+                <ul class="pagination text-center" th:if="*{totalPages gt 0}">
+                    <li class="pagination-previous" th:classappend="*{number le 0}  ? 'disabled'">
+                        <a th:if="*{number gt 0}" th:href="@{/post/{category}/{page}(category=${category}, page=*{number lt 2 ? 1 : number})}"
+                           th:attr="aria-label='Previous Page'">Previous</a>
+                        <th:block th:if="*{number le 0}" th:text="Previous"></th:block>
+                    </li>
+
+                    <li th:each="i : *{#numbers.sequence(number - 3 lt 1 ? 1 : number - 3, number + 5 gt totalPages ? totalPages : number + 5, 1)}"
+                        th:classappend="${i eq posts.number + 1} ? 'current'">
+                        <a th:href="@{/post/{category}/{page}(category=${category}, page=${i})}" th:attr="aria-label='Page ' + ${i}"
+                           th:text="${i}"></a>
+                    </li>
+                    <li class="pagination-next" th:classappend="*{number + 1 ge totalPages} ? 'disabled'">
+                        <a th:if="*{number + 1 lt totalPages}"
+                           th:href="@{/post/{category}/{page}(category=${category}, page=*{number lt 2 ? 1 : number + 2})}"
+                           th:attr="aria-label='Next Page'">Next</a>
+                        <th:block th:if="*{number + 1 ge totalPages}" th:text="Next"></th:block>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</th:block>

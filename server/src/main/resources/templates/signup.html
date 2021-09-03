@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Sign up - Akam</title>
+        <link rel="stylesheet" href="../css/app.css">
+        <script src="../js/app.js"></script>
+    <link rel="shortcut icon" href="#">
+</head>
+<body style="background: #eee !important;">
+<div class="grid-container">
+    <div class="grid-x grid-padding-x grid-y grid-padding-y align-center-middle" style="height: 100%;">
+        <div class="cell small-6">
+            <form class="callout" th:action="@{'/user/signup'}" method="post">
+                <h2>Please Sign up</h2>
+                <input type="text" name="username" placeholder="Username" required="" autofocus=""/>
+                <input type="password" name="password" placeholder="Password" required=""/>
+                <button class="button" type="submit">Sign up</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
