@@ -35,3 +35,4 @@ logging:
               BasicBinder: TRACE
 file:
   upload-dir: ${user.dir}/uploads
+  path: ${user.dir}

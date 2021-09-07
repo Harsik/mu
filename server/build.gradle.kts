@@ -28,6 +28,7 @@ repositories {
 }
 
 dependencies {
+	implementation("com.googlecode.mp4parser:isoparser:1.1.22")
 	implementation("org.springframework.boot:spring-boot-starter-web") {
 		exclude("org.springframework.boot", "spring-boot-starter-tomcat")
 	}
