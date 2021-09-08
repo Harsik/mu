@@ -1,3 +1,5 @@
+server:
+  port: 8081
 logging:
   file:
     path: ${user.dir}/logs
@@ -18,4 +20,9 @@ logging:
   pattern:
     console: '"%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n"'
     file: '"%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"'
-
+#  servlet:
+#    multipart:
+#      maxFilesize: 100MB
+#      maxRequestSize: 100MB
+file:
+  path: ${user.dir}/client

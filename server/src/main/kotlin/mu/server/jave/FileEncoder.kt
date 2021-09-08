@@ -6,6 +6,7 @@ import com.googlecode.mp4parser.authoring.Movie
 import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder
 import com.googlecode.mp4parser.authoring.tracks.AACTrackImpl
 import com.googlecode.mp4parser.authoring.tracks.h264.H264TrackImpl
+import mu.server.property.FileStorageProperties
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import java.io.File
@@ -13,18 +14,17 @@ import java.io.FileOutputStream
 
 
 @Component
-class FileEncoder {
-    @Value("\${file.path}")
-    lateinit var filePath: String
-
-    fun encoder() {
-        val h264Track = H264TrackImpl(FileDataSourceImpl(filePath+"/server/h264.h264"))
-        val aacTrack = AACTrackImpl(FileDataSourceImpl("audio.aac"))
+class FileEncoder(private val fileStorageProperties: FileStorageProperties) {
+    fun encoder(file: File) {
+        val filePath = fileStorageProperties.filePath
+        val h264Track = H264TrackImpl(FileDataSourceImpl(file))
+//        val h264Track = H264TrackImpl(FileDataSourceImpl(filePath+"/server/h264.h264"))
+//        val aacTrack = AACTrackImpl(FileDataSourceImpl("audio.aac"))
         val movie = Movie()
         movie.addTrack(h264Track)
 //        movie.addTrack(aacTrack)
         val mp4file: Container? = DefaultMp4Builder().build(movie)
-        val fc = FileOutputStream(File(filePath+"/server/output.mp4")).channel
+        val fc = FileOutputStream(File(filePath+"/server/newoutput.mp4")).channel
         mp4file?.writeContainer(fc)
         fc.close()
 

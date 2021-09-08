@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   data:
     mongodb:
@@ -23,7 +23,10 @@ spring:
       enabled: true
     freemarker:
       cache: false
-
+  servlet:
+    multipart:
+      maxFilesize: 100MB
+      maxRequestSize: 100MB
 logging:
   level:
     org:

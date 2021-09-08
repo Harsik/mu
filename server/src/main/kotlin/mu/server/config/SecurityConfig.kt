@@ -36,7 +36,7 @@ class SecurityConfig(
 
     override fun configure(http: HttpSecurity) {
         http
-//                .csrf().disable()
+                .csrf().disable()
                 .authorizeRequests()
 
                 /*페이지 권한 설정*/

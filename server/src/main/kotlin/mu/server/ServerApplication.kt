@@ -11,7 +11,7 @@ class ServerApplication
 {
 	@Bean
 	fun init(fileEncoder: FileEncoder) = CommandLineRunner {
-		fileEncoder.encoder();
+//		fileEncoder.encoder();
 	}
 }
 

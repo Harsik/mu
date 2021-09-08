@@ -2,10 +2,14 @@ package mu.server.controller
 
 import mu.server.domain.entity.FileInfo
 import mu.server.exception.NotFoundException
+import mu.server.jave.FileEncoder
 import mu.server.payload.UploadFileResponse
 import mu.server.service.AccountService
 import mu.server.service.FileStorageService
 import mu.server.service.PostService
+import org.slf4j.LoggerFactory
+import org.springframework.core.io.ClassPathResource
+import org.springframework.core.io.FileSystemResource
 import org.springframework.core.io.Resource
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
@@ -13,6 +17,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
+import java.io.File
 import java.io.IOException
 import javax.servlet.http.HttpServletRequest
 
@@ -22,8 +27,19 @@ import javax.servlet.http.HttpServletRequest
 class FileController(
     val postService: PostService,
     val fileStorageService: FileStorageService,
-    val accountService: AccountService
+    val accountService: AccountService,
+    val fileEncoder: FileEncoder
 ) {
+    private val log = LoggerFactory.getLogger(FileController::class.java)
+            @PostMapping("/uploadVideo")
+        fun uploadAvatar(
+                @RequestParam("file") file: FileSystemResource,
+                @RequestParam("cameraName") cameraName: String?
+        ): UploadFileResponse? {
+                log.info(cameraName, file.file.name)
+//                fileEncoder.encoder(file.file)
+            return UploadFileResponse("fileName","uri","content",0)
+        }
 //        @GetMapping("/loadAvatar")
 //        @PreAuthorize("hasRole('USER')")
 //        fun loadAvatar(@RequestParam(value = "email") email: String?): AvatarFileInfo? {

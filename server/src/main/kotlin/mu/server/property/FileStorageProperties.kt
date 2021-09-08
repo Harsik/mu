@@ -8,4 +8,6 @@ import org.springframework.stereotype.Component
 class FileStorageProperties {
     @Value("\${file.upload-dir}")
     lateinit var uploadDir: String
+    @Value("\${file.path}")
+    lateinit var filePath: String
 }
